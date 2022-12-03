@@ -16,7 +16,7 @@ cd OC_P7_algorithmes-en-Python
 2- Programmation dynamique (algorithme du sac à dos)
 
 
-Program execution:
+## Program execution:
 
 1- Bruteforce
 python bruteforce.py
