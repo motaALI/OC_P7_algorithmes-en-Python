@@ -1,6 +1,9 @@
 import csv
+import time
 
 MAX_INVEST = 50000
+
+start_time = time.time()
 
 def main():
     shares_list = read_data_set_csv()
@@ -16,10 +19,11 @@ def main():
 
     print("\nTotal cost : ", sum(cost), "€")
     print("Profit after 2 years : +", sum(profit), "€")
-    print(f"best combo : {sacADos(shares_list)}")
+    # print(f"best combo : {sacADos(shares_list)}")
+    print("\nExecution time per second: ", time.time() - start_time, "(s)\n")
 
 def read_data_set_csv():
-    with open("data/dataset_test.csv", "r") as data:
+    with open("data/dataset2_Python+P7.csv", "r") as data:
         shares_csv_reader = csv.reader(data)
         next(shares_csv_reader)
         shares_list = []
@@ -27,10 +31,9 @@ def read_data_set_csv():
             share = (
                 row[0],
                 int(float(row[1])*100),
-                float(row[2])
+                float(float(row[1]) * float(row[2]) /100)
             )
             shares_list.append(share)
-
         return shares_list
     
 def sacADos(shares_list):
@@ -47,11 +50,14 @@ def sacADos(shares_list):
     sa = [[0 for x in range(max_inv + 1)] for x in range(shares_total + 1)]
     
     for i in range(1, shares_total + 1):
+        action = shares_list[i - 1]
+        profit = action[2]
+        price = action[1]
         
         for w in range(1, max_inv + 1):
-            action = shares_list[i - 1]
-            profit = action[2]
-            price = action[1]
+            if price <= 0:
+                sa[i][w] = sa[i-1][w]
+                continue
             if cost[i-1] <= w:
                 
                 sa[i][w] = max(sa[i-1][w], profit + sa[i-1][w - price])
@@ -62,8 +68,10 @@ def sacADos(shares_list):
      # Profit optimal combination
     best_combo = []
     
-    while max_inv >= 0 and shares_total >= 0:
-
+    while max_inv >= 0 and shares_total > 0:
+        if cost[shares_total - 1] <= 0:
+            shares_total -= 1
+            continue
         if sa[shares_total][max_inv] == \
             sa[shares_total-1][max_inv - cost[shares_total-1]] + profits[shares_total-1]:
 

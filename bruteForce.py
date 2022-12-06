@@ -1,8 +1,11 @@
 from itertools import combinations
 import csv
+import time
 
 """maximum spend per client 500 €"""
 MAX_INVEST = 500
+
+start_time = time.time()
 
 def main():
     shares_list = read_data_set_csv()
@@ -19,6 +22,7 @@ def main():
 
     print("\nTotal cost : ", calculate_cost(best_combo), "€")
     print("Profit after 2 years : +", calc_profit(best_combo), "€")
+    print("\nExecution time per second: ", time.time() - start_time, "(s)\n")
 
 def read_data_set_csv():
     """Import shares data from dataset_test.csv"""
@@ -36,13 +40,12 @@ def read_data_set_csv():
     
 
 def set_combos(shares_list):
-    """Set all possible combinations of shares"""
+    """All possible combinations"""
     profit = 0
     best_combo = []
 
     for i in range(len(shares_list)):
         combos = combinations(shares_list, i+1)
-
         for combo in combos:
             total_cost = calculate_cost(combo)
 
