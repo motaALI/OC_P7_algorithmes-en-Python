@@ -26,9 +26,7 @@ The default investment amount is set at 500€.
 2- Programmation dynamique (Sac à dos)
 
 ## Run script:
-1-  python optimized.py 
-#### This command will run with dataset1_Python+P7.csv file py default
-2- python optimized.py <filename>
-#### This command will run with a file given as argument <filename>  
-ex: optimized.p dataset2_Python+P7
+1- python optimized.py dataset_test
+2- python optimized.py dataset1_Python+P7
+3- python optimized.py dataset2_Python+P7
 
