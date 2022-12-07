@@ -5,7 +5,7 @@ import time
 """maximum spend per client 500 €"""
 MAX_INVEST = 500
 
-start_time = time.time()
+start_at = time.time()
 
 def main():
     shares_list = read_data_set_csv()
@@ -22,7 +22,7 @@ def main():
 
     print("\nTotal cost : ", calculate_cost(best_combo), "€")
     print("Profit after 2 years : +", calc_profit(best_combo), "€")
-    print("\nExecution time per second: ", time.time() - start_time, "(s)\n")
+    print("\nExecution time per second: ", time.time() - start_at, "(s)\n")
 
 def read_data_set_csv():
     """Import shares data from dataset_test.csv"""

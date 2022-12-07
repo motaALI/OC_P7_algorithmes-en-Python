@@ -1,12 +1,22 @@
+import sys
 import csv
 import time
 
 MAX_INVEST = 50000
 
-start_time = time.time()
+start_at = time.time()
 
 def main():
-    shares_list = read_data_set_csv()
+    
+    """Ask user for a filename to be used in the algo"""
+    try:
+        filename = "data/" + sys.argv[1] + ".csv"
+    except IndexError:
+        print("\nFile not found. Please try again.\n")
+        time.sleep(1)
+        sys.exit()
+        
+    shares_list = read_data_set_csv(filename)
     
     cost = []
     profit = []
@@ -20,22 +30,32 @@ def main():
     print("\nTotal cost : ", sum(cost), "€")
     print("Profit after 2 years : +", sum(profit), "€")
     # print(f"best combo : {sacADos(shares_list)}")
-    print("\nExecution time per second: ", time.time() - start_time, "(s)\n")
+    print("\nExecution time per second: ", time.time() - start_at, "(s)\n")
 
-def read_data_set_csv():
-    with open("data/dataset2_Python+P7.csv", "r") as data:
-        shares_csv_reader = csv.reader(data)
-        next(shares_csv_reader)
-        shares_list = []
-        for row in shares_csv_reader:
-            share = (
-                row[0],
-                int(float(row[1])*100),
-                float(float(row[1]) * float(row[2]) /100)
-            )
-            shares_list.append(share)
-        return shares_list
-    
+def read_data_set_csv(filename):
+    try:
+        # with open("data/dataset2_Python+P7.csv", "r") as data:
+        with open(filename, "r") as data:
+            shares_csv_reader = csv.reader(data)
+            if filename != "data/dataset1_Python+P7.csv":
+                next(shares_csv_reader)
+            
+            next(shares_csv_reader)
+            shares_list = []
+            for row in shares_csv_reader:
+                share = (
+                    row[0],
+                    int(float(row[1])*100),
+                    float(float(row[1]) * float(row[2]) /100)
+                )
+                shares_list.append(share)
+            return shares_list
+        
+    except FileNotFoundError:
+        print(f"\nNo such file '{filename}' or directory. Please try again.\n")
+        time.sleep(1)
+        sys.exit()
+        
 def sacADos(shares_list):
     max_inv = int(MAX_INVEST)     # capacity
     shares_total = len(shares_list)
