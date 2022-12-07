@@ -7,7 +7,7 @@
 ### SSH : git clone git@github.com:motaALI/OC_P7_algorithmes-en-Python.git
 
 ### Then : 
-cd OC_P7_algorithmes-en-Python
+`cd OC_P7_algorithmes-en-Python`
 
 ## You will find two scripts
 
@@ -19,14 +19,16 @@ cd OC_P7_algorithmes-en-Python
 ## Program execution:
 
 1- Bruteforce
-python bruteforce.py
+`python bruteforce.py`
 
 The default investment amount is set at 500€.
 
 2- Programmation dynamique (Sac à dos)
 
 ## Run script:
-1- python optimized.py dataset_test
-2- python optimized.py dataset1_Python+P7
-3- python optimized.py dataset2_Python+P7
+1- `python optimized.py dataset_test` 
+
+2- `python optimized.py dataset1_Python+P7`
+
+3- `python optimized.py dataset2_Python+P7`
 
